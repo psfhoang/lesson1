@@ -6,9 +6,9 @@ public class DataResponse<T> {
     private int status;
     private Timestamp time;
     private String message;
-    private Object data;
+    private T data;
 
-    public DataResponse(int status, String message, Object data) {
+    public DataResponse(int status, String message, T data) {
         this.status = status;
         this.message = message;
         this.data = data;
@@ -53,7 +53,7 @@ public class DataResponse<T> {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 }

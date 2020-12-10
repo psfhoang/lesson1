@@ -27,7 +27,7 @@ public class BookController {
     public DataResponse<Book> insertBook(Book book) throws SQLException {
         return new DataResponse<>(200,"ok",bookService.insert(book));
     }
-    public DataResponse<Book> updateBook(Book book) throws SQLException{
+    public DataResponse<Boolean> updateBook(Book book) throws SQLException{
         return new DataResponse<>(200,"ok",bookService.Update(book));
     }
     public DataResponse<Boolean> deleteBook(int id) throws SQLException{
