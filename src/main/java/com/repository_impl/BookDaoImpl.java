@@ -1,7 +1,7 @@
 package com.repository_impl;
 
 import com.dto.BookWithAuthorName;
-import com.entity.MyConnection;
+import com.helper.MyConnection;
 import com.repository.BookDao;
 import com.entity.Book;
 
@@ -24,7 +24,7 @@ public class BookDaoImpl implements BookDao {
         String sql = "SELECT book.name,author.name FROM book inner join author on book.author_id=author.id";
         try {
             List<BookWithAuthorName> bookWithAuthorNames= new ArrayList<>();
-            PreparedStatement preparedStatement = myConnection.connection().prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE);
+            PreparedStatement preparedStatement = myConnection.getConnection().prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 BookWithAuthorName bookWithAuthorName = new BookWithAuthorName(resultSet.getString(1),resultSet.getString(2));
@@ -56,7 +56,7 @@ public class BookDaoImpl implements BookDao {
     public List<Book> findAll() throws SQLException {
         String sql = "select * from book";
         try {
-            PreparedStatement preparedStatement = myConnection.connection().prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE);
+            PreparedStatement preparedStatement = myConnection.getConnection().prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE);
             return this.getList(preparedStatement.executeQuery());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -70,7 +70,7 @@ public class BookDaoImpl implements BookDao {
         String sql="select * from book where id = ? ";
         try {
             Book book = null;
-            PreparedStatement preparedStatement = myConnection.connection().prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE);
+            PreparedStatement preparedStatement = myConnection.getConnection().prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE);
             preparedStatement.setInt(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
@@ -88,7 +88,7 @@ public class BookDaoImpl implements BookDao {
         Book book1 = null;
         String sql = "insert into book(name,author_id) values(?,?)";
         try {
-            PreparedStatement preparedStatement = myConnection.connection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = myConnection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1,book.getName());
             preparedStatement.setInt(2,book.getAuthor_Id());
             int rs = preparedStatement.executeUpdate();
@@ -112,7 +112,7 @@ public class BookDaoImpl implements BookDao {
     public boolean update(Book book) throws SQLException {
         String sql ="update book set name = ?,author_id = ? where id = ?";
         try {
-            PreparedStatement preparedStatement = myConnection.connection().prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE);
+            PreparedStatement preparedStatement = myConnection.getConnection().prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE);
             preparedStatement.setString(1,book.getName());
             preparedStatement.setInt(2,book.getAuthor_Id());
             preparedStatement.setInt(3,book.getId());
@@ -127,7 +127,7 @@ public class BookDaoImpl implements BookDao {
     public boolean delete(int id) throws SQLException {
         String sql = "delete from book where id = ?";
         try {
-            PreparedStatement preparedStatement = myConnection.connection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = myConnection.getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1,id);
             return preparedStatement.executeUpdate()>0;
         } catch (ClassNotFoundException e) {
@@ -141,7 +141,7 @@ public class BookDaoImpl implements BookDao {
         String sql="select * from book where name = ? ";
         try {
             Book book = null;
-            PreparedStatement preparedStatement = myConnection.connection().prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE);
+            PreparedStatement preparedStatement = myConnection.getConnection().prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE);
             preparedStatement.setString(1,name);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){

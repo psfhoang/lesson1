@@ -1,4 +1,4 @@
-package com.entity;
+package com.helper;
 
 import com.common.AppConfig;
 
@@ -16,7 +16,7 @@ public class MyConnection {
             throw new ClassCastException();
         }
     }
-    public Connection connection() throws ClassNotFoundException, SQLException {
+    public Connection getConnection() throws ClassNotFoundException, SQLException {
         this.testDriver();
         try{
             connection= DriverManager.getConnection(AppConfig.URL_DATABASE.getValue(),
