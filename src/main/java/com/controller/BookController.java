@@ -15,22 +15,22 @@ import java.util.List;
 
 public class BookController {
     private final BookServiceImpl bookService = new BookServiceImpl();
-    public DataResponse<List<Book>> getAllBooks() throws SQLException {
+    public DataResponse<List<Book>> getAllBooks()  {
         return new DataResponse<>(200,"ok",bookService.findAll());
     }
-    public DataResponse<Book> findBookById(int id) throws SQLException{
+    public DataResponse<Book> findBookById(int id){
         return new DataResponse<>(200,"ok",bookService.findById(id));
     }
-    public DataResponse<List<BookWithAuthorName>> bookWithAuthorNameDataResponse() throws SQLException {
+    public DataResponse<List<BookWithAuthorName>> bookWithAuthorNameDataResponse()  {
         return new DataResponse<>(200,"ok",bookService.bookWithAuthorNames());
     }
-    public DataResponse<Book> insertBook(Book book) throws SQLException {
+    public DataResponse<Book> insertBook(Book book)  {
         return new DataResponse<>(200,"ok",bookService.insert(book));
     }
-    public DataResponse<Boolean> updateBook(Book book) throws SQLException{
+    public DataResponse<Boolean> updateBook(Book book) {
         return new DataResponse<>(200,"ok",bookService.Update(book));
     }
-    public DataResponse<Boolean> deleteBook(int id) throws SQLException{
+    public DataResponse<Boolean> deleteBook(int id) {
         return new DataResponse<>(200,"ok",bookService.delete(id));
     }
 }

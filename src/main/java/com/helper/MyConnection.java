@@ -1,9 +1,8 @@
 package com.helper;
 
-import com.common.AppConfig;
+import com.common.Constant;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -11,7 +10,7 @@ public class MyConnection {
     public  Connection connection = null;
     public void testDriver() throws ClassNotFoundException{
         try {
-            Class.forName(AppConfig.DRIVER.getValue());
+            Class.forName(Constant.DRIVER.getValue());
         } catch (ClassNotFoundException e) {
             throw new ClassCastException();
         }
@@ -19,8 +18,8 @@ public class MyConnection {
     public Connection getConnection() throws ClassNotFoundException, SQLException {
         this.testDriver();
         try{
-            connection= DriverManager.getConnection(AppConfig.URL_DATABASE.getValue(),
-                    AppConfig.USERNAME.getValue(),AppConfig.PASSWORD.getValue());
+            connection= DriverManager.getConnection(Constant.URL_DATABASE.getValue(),
+                    Constant.USERNAME.getValue(), Constant.PASSWORD.getValue());
             System.out.println("ket noi thanh cong");
         }catch (SQLException e){
             throw new SQLException(e.getMessage());

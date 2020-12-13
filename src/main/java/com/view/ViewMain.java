@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ViewMain {
-    public ViewMain()throws SQLException {
+    public ViewMain(){
         Scanner scanner = new Scanner(System.in);
 
             BookController bookController = new BookController();
